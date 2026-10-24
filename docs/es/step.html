@@ -85,17 +85,17 @@
         };
 
         const steps = [
-            { id: '00-overview', file: '00-overview.md', title: 'Visión General', number: '00' },
-            { id: '01-setup', file: '01-setup.md', title: 'Configuración e Ingeniería de Contexto', number: '01' },
-            { id: '02-plan-and-scaffold', file: '02-plan-and-scaffold.md', title: 'Planificar y Estructurar', number: '02' },
-            { id: '03-agent-mode', file: '03-agent-mode.md', title: 'Construir el Juego', number: '03' },
-            { id: '04-design-vibes', file: '04-design-vibes.md', title: 'Temas Design-First', number: '04' },
-            { id: '05-polish', file: '05-polish.md', title: 'Pulido y Trabajo Paralelo', number: '05' },
-            { id: '06-bonus', file: '06-bonus.md', title: 'Bonus y Extensiones', number: '🎉' },
+            { id: '00-overview', file: 'workshop/es/00-overview.md', title: 'Visión General', number: '00' },
+            { id: '01-setup', file: 'workshop/es/01-setup.md', title: 'Configuración e Ingeniería de Contexto', number: '01' },
+            { id: '02-plan-and-scaffold', file: 'workshop/es/02-plan-and-scaffold.md', title: 'Planificar y Estructurar', number: '02' },
+            { id: '03-agent-mode', file: 'workshop/es/03-agent-mode.md', title: 'Construir el Juego', number: '03' },
+            { id: '04-design-vibes', file: 'workshop/es/04-design-vibes.md', title: 'Temas Design-First', number: '04' },
+            { id: '05-polish', file: 'workshop/es/05-polish.md', title: 'Pulido y Trabajo Paralelo', number: '05' },
+            { id: '06-bonus', file: 'workshop/es/06-bonus.md', title: 'Bonus y Extensiones', number: '🎉' },
         ];
 
         const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
-        const GITHUB_RAW_BASE = isLocal ? '../../workshop/es/' : 'https://raw.githubusercontent.com/copilot-dev-days/mona-mayhem/main/workshop/es/';
+        const GITHUB_RAW_BASE = isLocal ? '../../' : 'https://raw.githubusercontent.com/copilot-dev-days/mona-mayhem/main/';
         const STEP_ID_PATTERN = /^[a-z0-9-]{1,64}$/;
         const WHITESPACE_NORMALIZE_PATTERN = /[\s\n]+/g;
         const COPY_BUTTON_RESET_DELAY_MS = 2000;
@@ -207,9 +207,9 @@
                 return `<blockquote style="border-left-color: ${color};"><p style="color: ${color};">${icon} ${type.toUpperCase()}</p><p>${cleanContent}</p></blockquote>\n`;
             });
 
-            md = md.replace(/\[([^\]]+)\]\((?:\.\/)?(?:workshop\/(?:es\/)?)?(\d+)-([^)]+)\.md\)/g, function(match, text, num, slug) {
+            md = md.replace(/\[([^\]]+)\]\((?:\.\/)?(?:workshop\/)?(\d+)-([^)]+)\.md\)/g, function(match, text, num, slug) {
                 const stepId = `${num}-${slug}`;
-                const found = steps.find(s => s.id === stepId || s.file === `${num}-${slug}.md`);
+                const found = steps.find(s => s.id === stepId || s.file === `workshop/${num}-${slug}.md`);
                 if (found) {
                     return `[${text}](${buildStepUrl(found.id)})`;
                 }
